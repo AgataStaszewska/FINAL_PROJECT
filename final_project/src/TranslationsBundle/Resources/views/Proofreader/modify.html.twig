@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Modify proofreader information{% endblock %}
+
+{% block body %}
+<h1>Modify proofreader information</h1>
+
+{{form_start(form)}}
+{{form_widget(form)}}
+<input type="submit" value="Modify">
+{{form_end(form)}}
+
+{% endblock %}
+

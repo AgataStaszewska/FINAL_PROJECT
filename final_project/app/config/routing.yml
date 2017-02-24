@@ -1,0 +1,6 @@
+translations:
+    resource: "@TranslationsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+

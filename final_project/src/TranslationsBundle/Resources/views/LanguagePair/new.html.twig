@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Add new language pair{% endblock %}
+
+{% block body %}
+    <h1> Add new language pair </h1>
+
+{{form_start(form)}}
+{{form_row(form.languagePair)}}
+<input type="submit" value="Create">
+{{form_end(form)}}
+
+{% endblock %}

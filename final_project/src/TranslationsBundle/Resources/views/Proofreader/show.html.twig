@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <h1>{{proofreader.name}} {{proofreader.surname}}</h1><br>
+    
+    Contact information:<br>
+    {{proofreader.email}}<br>
+    {{proofreader.phone}}<br>
+    <br>
+    Pary językowe:<br>
+    {#WYŚWIETLIĆ PARY JĘZYKOWE#}
+    
+    
+    
+    <br>
+    <br>
+    <a class="btn btn-primary" href='{{path('translations_proofreader_showall') }}'>Back to list</a>
+    <a class="btn btn-primary" href='{{path('translations_proofreader_modify', {'id':proofreader.id}) }}'>Modify proofreader information</a>
+    {% endblock %}
