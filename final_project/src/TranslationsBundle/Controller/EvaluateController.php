@@ -10,6 +10,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use TranslationsBundle\Entity\LanguagePair;
+use TranslationsBundle\Form\LanguagePairType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class EvaluateController extends Controller{
     /**
@@ -20,11 +24,10 @@ class EvaluateController extends Controller{
     public function evaluateAction(Request $request)
 {
        
-    $file = array('file' => 'Evaluate file');
+    $file = array('file' => 'Prepare a quote');
     $form = $this->createFormBuilder($file)
-        ->add('name', TextType::class)
-        ->add('email', EmailType::class)
-        ->add('message', TextareaType::class)
+        ->add('File', FileType::class)
+        ->add('languagePairs', EntityType::class, array('choice_label'=> 'languagePair', 'class' => 'TranslationsBundle:LanguagePair', 'multiple' => true, 'expanded' => true)) 
         ->add('send', SubmitType::class)
         ->getForm();
 
