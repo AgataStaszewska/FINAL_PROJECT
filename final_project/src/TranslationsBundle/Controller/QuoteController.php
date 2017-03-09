@@ -15,9 +15,9 @@ use TranslationsBundle\Entity\LanguagePair;
 use TranslationsBundle\Form\LanguagePairType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class EvaluateController extends Controller{
+class QuoteController extends Controller{
     /**
-     * @Route("/evaluate")
+     * @Route("/quote")
      * @param Request $request
      */
     
@@ -27,7 +27,8 @@ class EvaluateController extends Controller{
     $file = array('file' => 'Prepare a quote');
     $form = $this->createFormBuilder($file)
         ->add('File', FileType::class)
-        ->add('languagePairs', EntityType::class, array('choice_label'=> 'languagePair', 'class' => 'TranslationsBundle:LanguagePair', 'multiple' => true, 'expanded' => true)) 
+        ->add('languagePairs', EntityType::class, array('choice_label'=> 'languagePair', 'class' => 'TranslationsBundle:LanguagePair', 'multiple' => false, 'expanded' => true))
+        ->add('field', EntityType::class, array('choice_label'=> 'field', 'class' => 'TranslationsBundle:Field', 'multiple' => false, 'expanded' => true))    
         ->add('send', SubmitType::class)
         ->getForm();
 
@@ -39,7 +40,7 @@ class EvaluateController extends Controller{
         return $data;
     }
 
-    return $this->render('TranslationsBundle:Evaluate:evaluate.html.twig', array('form' => $form->createView()
+    return $this->render('TranslationsBundle:Quote:quote.html.twig', array('form' => $form->createView()
     ));// ... render the form
 }
     
