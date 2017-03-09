@@ -29,19 +29,20 @@ class QuoteController extends Controller{
         ->add('File', FileType::class)
         ->add('languagePairs', EntityType::class, array('choice_label'=> 'languagePair', 'class' => 'TranslationsBundle:LanguagePair', 'multiple' => false, 'expanded' => true))
         ->add('field', EntityType::class, array('choice_label'=> 'field', 'class' => 'TranslationsBundle:Field', 'multiple' => false, 'expanded' => true))    
-        ->add('send', SubmitType::class)
+        ->add('quote', SubmitType::class)
         ->getForm();
 
     $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // data is an array with "name", "email", and "message" keys
-        $data = $form->getData();
-        return $data;
+    
+    if ($form->get('quote')->isClicked() && $form->isSubmitted() && $form->isValid()) {
+        $response = new Response;
+        $response = $form->getData();
+        return $response;
     }
 
     return $this->render('TranslationsBundle:Quote:quote.html.twig', array('form' => $form->createView()
-    ));// ... render the form
+    ));
+
 }
     
 }
