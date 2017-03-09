@@ -1,5 +1,8 @@
 
 <?php
+
+require "numberOfSignsFunction.php";
+
 function quoteProject($languagePair, $field){
     if(!$languagePair){
         

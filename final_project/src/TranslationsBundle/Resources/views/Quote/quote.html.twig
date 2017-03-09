@@ -1,9 +1,8 @@
 {% extends '::base.html.twig' %}
-{% extends '::web/numberOfSignsFunction.php' %}
-{% extends '::web/quoteFunction.php' %}
+
 {% block javascripts %}
-    <script src="{{ asset('../web/jquery.js') }}"></script>
-    <script src="{{ asset('../web/app.js') }}"></script>
+    <script src="{{ asset('jquery.js') }}"></script>
+    <script src="{{ asset('app.js') }}"></script>
 {% endblock %}
 
 {% block title %}Prepare a quote{% endblock %}
@@ -13,7 +12,7 @@
 
 {{form_start(form)}}
 {{form_widget(form)}}
-{#<input type="submit" value="Evaluate">#}
+<input type="submit" value="Quote" id="button">
 {{form_end(form)}}
 
 {% endblock %}

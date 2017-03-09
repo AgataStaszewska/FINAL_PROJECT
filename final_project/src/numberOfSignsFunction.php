@@ -1,6 +1,6 @@
 <?php
 
-function extracttext($filename) {
+function extractText($filename) {
     
  $exploded = explode('.', $filename);
  $extension = end($exploded);
@@ -24,7 +24,7 @@ function extracttext($filename) {
     return "File not found";
 }
 
-$string = extracttext($filename);
+$string = extractText($filename);
 echo strlen($string);
 echo "<br>";
 ?>
