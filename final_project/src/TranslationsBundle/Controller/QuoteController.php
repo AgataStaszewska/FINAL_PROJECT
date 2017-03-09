@@ -30,7 +30,7 @@ class QuoteController extends Controller{
         ->add('File', FileType::class)
         ->add('languagePairs', EntityType::class, array('choice_label'=> 'languagePair', 'class' => 'TranslationsBundle:LanguagePair', 'multiple' => false, 'expanded' => true))
         ->add('field', EntityType::class, array('choice_label'=> 'field', 'class' => 'TranslationsBundle:Field', 'multiple' => false, 'expanded' => true))    
-        ->add('quote', SubmitType::class)
+        ->add('quote', SubmitType::class, array('attr'=>array('class'=>'quote')))
         ->getForm();
     
     $form->handleRequest($request);
@@ -39,7 +39,8 @@ class QuoteController extends Controller{
 
         $data = $form->getData();
         $response = new Response;
-//        var_dump($data);
+        echo('CCC');
+        var_dump($data);
         return $response;
     }
 

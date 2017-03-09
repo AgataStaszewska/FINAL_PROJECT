@@ -2,8 +2,10 @@
 
 $(document).ready(function(){
     console.log('AAA');
-    $('#button').on('click', function(){
+    $('.quote').on('click', function(){
         console.log('BBB');
+       
+
 //      $.ajax({
 //        url: "/src/numberOfSignsFunction.php",
 //        data: {},
