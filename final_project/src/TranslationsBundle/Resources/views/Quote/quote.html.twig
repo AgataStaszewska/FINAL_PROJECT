@@ -1,4 +1,10 @@
 {% extends '::base.html.twig' %}
+{% extends '::web/numberOfSignsFunction.php' %}
+{% extends '::web/quoteFunction.php' %}
+{% block javascripts %}
+    <script src="{{ asset('../web/jquery.js') }}"></script>
+    <script src="{{ asset('../web/app.js') }}"></script>
+{% endblock %}
 
 {% block title %}Prepare a quote{% endblock %}
 

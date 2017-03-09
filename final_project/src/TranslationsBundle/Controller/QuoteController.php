@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use TranslationsBundle\Entity\LanguagePair;
+use TranslationsBundle\Entity\Project;
 use TranslationsBundle\Form\LanguagePairType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -23,7 +24,7 @@ class QuoteController extends Controller{
     
     public function evaluateAction(Request $request)
 {
-       
+ 
     $file = array('file' => 'Prepare a quote');
     $form = $this->createFormBuilder($file)
         ->add('File', FileType::class)
@@ -31,12 +32,14 @@ class QuoteController extends Controller{
         ->add('field', EntityType::class, array('choice_label'=> 'field', 'class' => 'TranslationsBundle:Field', 'multiple' => false, 'expanded' => true))    
         ->add('quote', SubmitType::class)
         ->getForm();
-
-    $form->handleRequest($request);
     
+    $form->handleRequest($request);
+  
     if ($form->get('quote')->isClicked() && $form->isSubmitted() && $form->isValid()) {
+
+        $data = $form->getData();
         $response = new Response;
-        $response = $form->getData();
+//        var_dump($data);
         return $response;
     }
 
