@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use TranslationsBundle\Entity\LanguagePair;
 use TranslationsBundle\Entity\Project;
@@ -35,7 +36,7 @@ class QuoteController extends Controller{
     
     $form->handleRequest($request);
   
-    if ($form->get('quote')->isClicked() && $form->isSubmitted() && $form->isValid()) {
+    if ($form && $form->isSubmitted() && $form->isValid()) {
 
         $data = $form->getData();
         $response = new Response;
@@ -43,7 +44,6 @@ class QuoteController extends Controller{
         var_dump($data);
         return $response;
     }
-
     return $this->render('TranslationsBundle:Quote:quote.html.twig', array('form' => $form->createView()
     ));
 

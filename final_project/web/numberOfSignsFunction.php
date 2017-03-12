@@ -1,7 +1,7 @@
 <?php
-//function extractText($filename) {
-    function extractText() {
-
+echo "BBBB";
+function extractText($filename) {
+    
  $exploded = explode('.', $filename);
  $extension = end($exploded);
 
