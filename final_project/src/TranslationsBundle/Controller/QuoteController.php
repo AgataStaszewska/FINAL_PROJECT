@@ -23,7 +23,7 @@ class QuoteController extends Controller{
      * @param Request $request
      */
     
-    public function evaluateAction(Request $request)
+    public function quoteAction(Request $request)
 {
  
     $file = array('file' => 'Prepare a quote');
@@ -36,12 +36,15 @@ class QuoteController extends Controller{
     
     $form->handleRequest($request);
   
-    if ($form && $form->isSubmitted() && $form->isValid()) {
+    if ($form->isSubmitted() && $form->isValid()) {
+
 
         $data = $form->getData();
         $response = new Response;
-        echo('CCC');
+
+//        $response = $form->getData();
         var_dump($data);
+        
         return $response;
     }
     return $this->render('TranslationsBundle:Quote:quote.html.twig', array('form' => $form->createView()
