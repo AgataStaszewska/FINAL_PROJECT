@@ -1,7 +1,8 @@
 <?php
 echo "BBBB";
-function extractText($filename) {
-    
+$filename = $_POST['File'];
+
+function extractText($filename) {    
  $exploded = explode('.', $filename);
  $extension = end($exploded);
 
@@ -20,14 +21,10 @@ function extractText($filename) {
             return strip_tags($xml->saveXML());
         }
         $zip->close();
+    }else{
+    echo "File not found";
+    return false;
     }
-    return "File not found";
 }
 
-//$string = extractText($filename);
-//echo $length = strlen($string);
-//echo "<br>";
-//echo json_encode($length);
-//echo "<br>";
-//echo "BBBB";
 ?>

@@ -43,7 +43,7 @@ class QuoteController extends Controller{
         $response = new Response;
 
 //        $response = $form->getData();
-        var_dump($data);
+//        var_dump($data);
         
         return $response;
     }
