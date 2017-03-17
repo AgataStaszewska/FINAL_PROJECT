@@ -25,11 +25,11 @@ class TESTQuoteController extends Controller{
         ->add('File', FileType::class)
         ->add('field', EntityType::class, array('choice_label'=> 'field', 'class' => 'TranslationsBundle:Field', 'multiple' => false, 'expanded' => true)) 
         ->add('languagePairs', EntityType::class, array('choice_label'=> 'languagePair', 'class' => 'TranslationsBundle:LanguagePair', 'multiple' => false, 'expanded' => true))        
-        ->add('quote', SubmitType::class, array('attr'=>array('class'=>'quote')))
+        ->add('quote', ButtonType::class, array('attr'=>array('class'=>'quote')))
         ->getForm();
         
         $form->handleRequest($request);
-        var_dump($form);
+//        var_dump($form);
         return $this->render('TranslationsBundle:Quote:quote2.html.twig', array('form' => $form->createView()
     ));
 }
