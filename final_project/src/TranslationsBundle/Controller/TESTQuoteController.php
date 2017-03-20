@@ -22,14 +22,29 @@ class TESTQuoteController extends Controller{
     public function quoteAction(Request $request){
         
         $form = $this->createFormBuilder()
-        ->add('File', FileType::class)
+        ->add('File', FileType::class, array('label'=>'Document (DOCX file)'))
         ->add('field', EntityType::class, array('choice_label'=> 'field', 'class' => 'TranslationsBundle:Field', 'multiple' => false, 'expanded' => true)) 
         ->add('languagePairs', EntityType::class, array('choice_label'=> 'languagePair', 'class' => 'TranslationsBundle:LanguagePair', 'multiple' => false, 'expanded' => true))        
-        ->add('quote', ButtonType::class, array('attr'=>array('class'=>'quote')))
+        ->add('quote', SubmitType::class, array('attr'=>array('class'=>'quote')))
         ->getForm();
         
         $form->handleRequest($request);
-//        var_dump($form);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+             $data = $form->getData();
+                $dir = "QUOTES";
+                $file = $form['File']->getData();
+                $fileName = $file->getClientOriginalName();
+                var_dump($fileName);
+                $file->move($dir, $fileName);
+
+                
+
+        $response = new Response;
+        return $response;
+        
+        }
+
         return $this->render('TranslationsBundle:Quote:quote2.html.twig', array('form' => $form->createView()
     ));
 }
