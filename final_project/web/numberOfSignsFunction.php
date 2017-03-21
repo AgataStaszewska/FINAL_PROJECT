@@ -1,6 +1,7 @@
 <?php
 echo "BBBB";
-
+$filename = $_POST['filename'];
+echo $filename;
 function extractText($filename) {    
  $pathToFile = "../../Downloads/".$filename;
  $exploded = explode('.', $filename);

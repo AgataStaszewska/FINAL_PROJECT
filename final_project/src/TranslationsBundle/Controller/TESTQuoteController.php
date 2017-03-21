@@ -31,12 +31,14 @@ class TESTQuoteController extends Controller{
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-             $data = $form->getData();
+                $data = $form->getData();
+                
                 $dir = "QUOTES";
                 $file = $form['File']->getData();
                 $fileName = $file->getClientOriginalName();
                 var_dump($fileName);
-                $file->move($dir, $fileName);
+//                $file->move($dir, $fileName);
+                $file->move($this->getParameter('QUOTES'), $fileName);
 
                 
 
