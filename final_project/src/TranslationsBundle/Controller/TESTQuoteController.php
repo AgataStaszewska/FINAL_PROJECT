@@ -1,5 +1,4 @@
 <?php
-
 namespace TranslationsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,7 +31,7 @@ class TESTQuoteController extends Controller{
         
         if ($form->isSubmitted() && $form->isValid()) {
                 $data = $form->getData();
-                
+                var_dump($_FILES);
                 $dir = "QUOTES";
                 $file = $form['File']->getData();
                 $fileName = $file->getClientOriginalName();
