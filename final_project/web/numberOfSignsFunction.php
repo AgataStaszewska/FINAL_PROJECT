@@ -1,6 +1,7 @@
 <?php
 
 $filename = $_POST['fileName'];
+
 function extractText($filename) {    
  $pathToFile = "/home/agata/Workspace/ForQuote/".$filename;
  $exploded = explode('.', $filename);
@@ -30,7 +31,12 @@ function extractText($filename) {
     
 }
 $length = strlen(extractText($filename));
-$numberOfPages = floor($length/1800);
-echo "Number of characters in the file: ".$length." (including spaces). This is ".$numberOfPages." full pages.";
+$numberOfPages = ceil($length/1800);
+
+$returned['1'] = $lenght;
+$returned['2'] = $numberOfPages;
+$returned['3'] = "Liczba znaków w pliku: ".$length." (ze spacjami). Liczba stron obliczeniowych: ".$numberOfPages;
+echo json_encode($returned);
+//echo "Liczba znaków w pliku: ".$length." (ze spacjami). Liczba stron obliczeniowych: ".$numberOfPages;
 
 ?>

@@ -28,7 +28,6 @@ $(document).ready(function(){
             url:'submit.php',
             type: 'POST',
             data: data,
-            cache: false,
             processData: false,
             contentType: false
         })
@@ -44,16 +43,17 @@ $(document).ready(function(){
                 });
     
         var fileName = document.getElementById('form_File').files[0].name;
-        console.log(fileName);
+ 
         $.ajax({
             url:'numberOfSignsFunction.php',
             type: 'POST',
-            data: {fileName: fileName}
+            data: {fileName: fileName},
+            dataType: 'json'
             
         })
-                .done(function(data){
+                .done(function(response){
                 
-                    alert(data);
+                    printresult(response);
                 
                 })
                 .fail(function(){
@@ -61,6 +61,39 @@ $(document).ready(function(){
                     alert("FAIL");
                 
                 });
+                
+        function printresult(response){
+            
+            alert(response['3']);
+            var languagePairs = document.getElementsByName('form[languagePairs]');
+            var field = document.getElementsByName('form[field]');
+            var quoteData = [];
+            console.log(quoteData);
+                    for(i=0; i<languagePairs.length; i++){
+                        if(languagePairs[i].checked===true){
+                             
+                            var label = languagePairs[i].nextElementSibling;
+                            var languagePairText = label.innerText;
+                            quoteData.push(languagePairText);
+                
+                        }
+
+                    }
+                    for(i=0; i<field.length; i++){
+                        if(field[i].checked===true){
+                
+                            var label = field[i].nextElementSibling;
+                            var fieldText = label.innerText;
+                            quoteData.push(fieldText);
+                            
+                        }
+            
+                    }
+
+            console.log(quoteData);           
+        }
+        
+        
 
     }
     

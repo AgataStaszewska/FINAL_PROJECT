@@ -7,12 +7,12 @@ if(isset($_FILES)){
     if(file_exists($uploaddir)){
        $uploadfile = $uploaddir.basename($_FILES['file']['name']);
        move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile); 
-       echo "File uploaded successfully";
+       echo "Udało się przesłać plik";
     }else{
        mkdir($uploaddir);
        $uploadfile = $uploaddir.basename($_FILES['file']['name']);
        move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);  
-       echo "The directory was created and the file was successfully uploaded";
+       echo "Utworzono katalog i przesłano plik";
     }
 }
 
