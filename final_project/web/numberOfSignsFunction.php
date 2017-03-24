@@ -1,9 +1,8 @@
 <?php
-echo "BBBB";
-$filename = $_POST['filename'];
-echo $filename;
+
+$filename = $_POST['fileName'];
 function extractText($filename) {    
- $pathToFile = "../../Downloads/".$filename;
+ $pathToFile = "/home/agata/Workspace/ForQuote/".$filename;
  $exploded = explode('.', $filename);
  $extension = end($exploded);
 
@@ -22,12 +21,16 @@ function extractText($filename) {
             return strip_tags($xml->saveXML());
         }
         $zip->close();
-        echo "AAA";
+        return true;
+        
     }else{
     echo "File not found";
     return false;
     }
     
 }
+$length = strlen(extractText($filename));
+$numberOfPages = floor($length/1800);
+echo "Number of characters in the file: ".$length." (including spaces). This is ".$numberOfPages." full pages.";
 
 ?>

@@ -13,49 +13,61 @@ $(document).ready(function(){
 
         }
         
-    $('form').on('submit', uploadFile);
+    $('form').on('submit', quoteFile);
  
-    function uploadFile(event){
+    function quoteFile(event){
         
         event.stopPropagation();
         event.preventDefault();
-        
-        
-//    };
+
+        var data = new FormData();
+        var file = document.getElementById('form_File').files[0];   
+        data.append("file", file);
     
-    var data = new FormData();
-    var file = document.getElementById('form_File').files[0];   
-    console.log(file);
-    data.append("file", file);
-    console.log(data.getAll('file')); //TO DZIAŁA!
+        $.ajax({
+            url:'submit.php',
+            type: 'POST',
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false
+        })
+                .done(function(data){
+                
+                    alert(data);
+                
+                })
+                .fail(function(){
+                
+                    alert("FAIL");
+                
+                });
     
-    $.ajax({
-        url:'submit.php',
-        type: 'POST',
-        data: data,
-        cache: false,
-//        dataType: 'json',
-        processData: false,
-        contentType: false,
-//        success: function(data, textStatus, jqXHR){},
-//        error: function(jqXHR, textStatus, errorThrown){
-//            console.log("ERRORS: "+ textStatus);
-//        }
-        
-       
-    })
-            .done(function(data){
+        var fileName = document.getElementById('form_File').files[0].name;
+        console.log(fileName);
+        $.ajax({
+            url:'numberOfSignsFunction.php',
+            type: 'POST',
+            data: {fileName: fileName}
+            
+        })
+                .done(function(data){
                 
-                alert(data);
+                    alert(data);
                 
-    })
-            .fail(function(){
+                })
+                .fail(function(){
                 
-                alert("FAIL");
+                    alert("FAIL");
                 
-    });
+                });
 
     }
+    
+
+        
+              
+});
     
 //    $('.quote').on('click', function(event){
 //        var languagePairs = document.getElementsByName('form[languagePairs]');
@@ -110,5 +122,5 @@ $(document).ready(function(){
 //    
 //    event.preventDefault();        
 //    });
-});
+//});
 
