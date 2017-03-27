@@ -33,10 +33,9 @@ function extractText($filename) {
 $length = strlen(extractText($filename));
 $numberOfPages = ceil($length/1800);
 
-$returned['1'] = $lenght;
+$returned['1'] = $length;
 $returned['2'] = $numberOfPages;
 $returned['3'] = "Liczba znaków w pliku: ".$length." (ze spacjami). Liczba stron obliczeniowych: ".$numberOfPages;
 echo json_encode($returned);
-//echo "Liczba znaków w pliku: ".$length." (ze spacjami). Liczba stron obliczeniowych: ".$numberOfPages;
 
 ?>

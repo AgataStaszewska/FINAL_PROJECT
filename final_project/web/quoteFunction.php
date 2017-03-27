@@ -1,9 +1,15 @@
-
 <?php
-
-require "numberOfSignsFunction.php";
+echo "BBB";
+//require "numberOfSignsFunction.php";
+//$languagePair = $_POST['languagePair'];
+//$field = $_POST['field'];
+//$length = $_POST['length'];
 
 function quoteProject($languagePair, $field){
+    
+ $languagePair = $_POST['languagePair'];
+ $field = $_POST['field'];
+ $length = $_POST['length'];
     if(!$languagePair){
         
         echo "Proszę wybrać parę językową";
@@ -50,22 +56,23 @@ function quoteProject($languagePair, $field){
             break;
         
     }
-    echo "Cena za stronę tłumaczenia wynosi ".$price." złotych.";
-    echo "<br>";  
     return $price;
 }
 
-function totalPrice($price,$length){
-    if($length<1800){
-        $length = 1800;
-    }
-        
-    $numberOfPages = ceil($length/1800);
-    $totalPrice = $numberOfPages*$price;
-    echo "Cena całego tłumaczenia wynosi ".$totalPrice." złotych";
-    echo "<br>";
-    return $totalPrice;
+//function totalPrice($price,$length){
+//    if($length<1800){
+//        $length = 1800;
+//    }
+//        
+//    $numberOfPages = ceil($length/1800);
+//    $totalPrice = $numberOfPages*$price;
+//
+//    return $totalPrice;
+//
+//       
+//}
 
-       
-}
-
+$returned['1'] = $price;
+$returned['2'] = $totalPrice;
+$returned['3'] = "Cena za stronę tłumaczenia wynosi: ".$price." PLN. Cena za całość tłumaczenia wynosi: ".$totalPrice." PLN.";
+echo json_encode($returned);
