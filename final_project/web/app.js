@@ -5,10 +5,7 @@ $(document).ready(function(){
     
     //Variable for storing file:
     var uploadedFile; 
-    //Variable to store file length:
-//    var fileLength;
-
-   
+  
     $('#form_File').on('change', prepareUpload);
         
         function prepareUpload(event){
@@ -23,8 +20,6 @@ $(document).ready(function(){
     
     function quoteFile(event){
         
-//        quoteData = []; //Array for variables to be passed to functions
-        
         var languagePairs = document.getElementsByName('form[languagePairs]');
         var field = document.getElementsByName('form[field]');
 
@@ -34,7 +29,7 @@ $(document).ready(function(){
                              
                     var label = languagePairs[i].nextElementSibling;
                     var languagePairText = label.innerText;
-                        quoteData.push(languagePairText);
+                    quoteData.push(languagePairText);
 
                 }
 
@@ -89,8 +84,7 @@ $(document).ready(function(){
                      quoteData.push(response[1]);
                      finalQuote(event);
                      alert(response[3]);
-                     alert(response[1]);
-//                     quoteData.push(response[1]);
+//                     alert(response[1]);
                 
                 })
                 .fail(function(){
@@ -107,9 +101,6 @@ $(document).ready(function(){
             var field = quoteData[1];
             var languagePair = quoteData[0];
             var length = quoteData[2];
-            console.log(field);
-            console.log(languagePair);
-            console.log(length);
             
             $.ajax({
             url:'quoteFunction.php',
@@ -117,8 +108,7 @@ $(document).ready(function(){
             data: {languagePair: languagePair,
             field: field,
             length: length
-                },
-            
+                }           
         })
                 .done(function(response){
                     
