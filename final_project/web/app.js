@@ -7,33 +7,7 @@ $(document).ready(function(){
     var uploadedFile; 
     //Variable to store file length:
     var fileLength;
-    //Array for variables to be passed to functions:
-    var quoteData = [];
-    
-                var languagePairs = document.getElementsByName('form[languagePairs]');
-            var field = document.getElementsByName('form[field]');
 
-            
-                    for(i=0; i<languagePairs.length; i++){
-                        if(languagePairs[i].checked===true){
-                             
-                            var label = languagePairs[i].nextElementSibling;
-                            var languagePairText = label.innerText;
-                            quoteData.push(languagePairText);
-
-                        }
-
-                    }
-                    for(i=0; i<field.length; i++){
-                        if(field[i].checked===true){
-                
-                            var label = field[i].nextElementSibling;
-                            var fieldText = label.innerText;
-                            quoteData.push(fieldText);
-
-                        }
-            
-                    }
    
     $('#form_File').on('change', prepareUpload);
         
@@ -46,6 +20,34 @@ $(document).ready(function(){
     $('form').on('submit', quoteFile);
  
     function quoteFile(event){
+        
+        quoteData = []; //Array for variables to be passed to functions
+        
+        var languagePairs = document.getElementsByName('form[languagePairs]');
+        var field = document.getElementsByName('form[field]');
+
+            
+            for(i=0; i<languagePairs.length; i++){
+                if(languagePairs[i].checked===true){
+                             
+                    var label = languagePairs[i].nextElementSibling;
+                    var languagePairText = label.innerText;
+                        quoteData.push(languagePairText);
+
+                }
+
+            }
+                   
+            for(i=0; i<field.length; i++){
+                if(field[i].checked===true){
+                
+                    var label = field[i].nextElementSibling;
+                    var fieldText = label.innerText;
+                    quoteData.push(fieldText);
+
+                }
+            
+            }
         
         event.stopPropagation();
         event.preventDefault();
@@ -73,7 +75,9 @@ $(document).ready(function(){
                 });
     
         var fileName = document.getElementById('form_File').files[0].name;
- 
+//        var field = quoteData[1];
+//        var languagePair = quoteData[0];
+//        console.log(field);
         $.ajax({
             url:'numberOfSignsFunction.php',
             type: 'POST',
@@ -82,8 +86,7 @@ $(document).ready(function(){
             
         })
                 .done(function(response){
-                    
-                     sendToQuote(response);
+                     finalQuote(event);
                      alert(response['3']);
 
                 
@@ -93,40 +96,41 @@ $(document).ready(function(){
                     alert("FAIL");
                 
                 });
-                
-        function sendToQuote(response){
-                        
-            quoteData.push(response['1']);
-            console.log(quoteData);
+                   
+        function finalQuote(event){
             
-                $.ajax({
-                    url:'quoteFunction.php',
-                    type: 'POST',
-                    data: {action: 'quoteProject',
-                    languagePair: quoteData[0],
-                    field: quoteData[1],
-                    length: quoteData[2]},
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false
-     
+            event.stopPropagation();
+            event.preventDefault();
+            
+            var field = quoteData[1];
+            var languagePair = quoteData[0];
+            
+            console.log(field);
+            console.log(languagePair);
+
+            
+            $.ajax({
+            url:'quoteFunction.php',
+            type: 'POST',
+            data: {languagePair: languagePair,
+            field: field},
+//            dataType: 'json'
+            
         })
-                .done(function(returned){
-                     console.log(quoteData);
-                     alert(returned['1']);
+                .done(function(response){
+                    
+                     alert(response);
+
                 
                 })
-//                .fail(function(){
-//                
-//                    alert("BŁĄD PRZY WYCENIE");
-//                
-//                });
-
-                        
-                }
-
-    }        
-          
+                .fail(function(){
+                
+                    alert("FAIL");
+                
+                });
+            }
+                
+    }       
 });
     
 
