@@ -35,8 +35,7 @@ class TESTQuoteController extends Controller{
                 $dir = "QUOTES";
                 $file = $form['File']->getData();
                 $fileName = $file->getClientOriginalName();
-                var_dump($fileName);
-//                $file->move($dir, $fileName);
+
                 $file->move($this->getParameter('QUOTES'), $fileName);
 
                 

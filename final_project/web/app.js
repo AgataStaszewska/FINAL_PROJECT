@@ -6,7 +6,7 @@ $(document).ready(function(){
     //Variable for storing file:
     var uploadedFile; 
     //Variable to store file length:
-    var fileLength;
+//    var fileLength;
 
    
     $('#form_File').on('change', prepareUpload);
@@ -19,9 +19,11 @@ $(document).ready(function(){
         
     $('form').on('submit', quoteFile);
  
+    var quoteData = []; //Array for variables to be passed to functions
+    
     function quoteFile(event){
         
-        quoteData = []; //Array for variables to be passed to functions
+//        quoteData = []; //Array for variables to be passed to functions
         
         var languagePairs = document.getElementsByName('form[languagePairs]');
         var field = document.getElementsByName('form[field]');
@@ -75,9 +77,7 @@ $(document).ready(function(){
                 });
     
         var fileName = document.getElementById('form_File').files[0].name;
-//        var field = quoteData[1];
-//        var languagePair = quoteData[0];
-//        console.log(field);
+
         $.ajax({
             url:'numberOfSignsFunction.php',
             type: 'POST',
@@ -86,9 +86,11 @@ $(document).ready(function(){
             
         })
                 .done(function(response){
+                     quoteData.push(response[1]);
                      finalQuote(event);
-                     alert(response['3']);
-
+                     alert(response[3]);
+                     alert(response[1]);
+//                     quoteData.push(response[1]);
                 
                 })
                 .fail(function(){
@@ -96,7 +98,7 @@ $(document).ready(function(){
                     alert("FAIL");
                 
                 });
-                   
+         
         function finalQuote(event){
             
             event.stopPropagation();
@@ -104,17 +106,18 @@ $(document).ready(function(){
             
             var field = quoteData[1];
             var languagePair = quoteData[0];
-            
+            var length = quoteData[2];
             console.log(field);
             console.log(languagePair);
-
+            console.log(length);
             
             $.ajax({
             url:'quoteFunction.php',
             type: 'POST',
             data: {languagePair: languagePair,
-            field: field},
-//            dataType: 'json'
+            field: field,
+            length: length
+                },
             
         })
                 .done(function(response){

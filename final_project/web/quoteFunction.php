@@ -1,8 +1,10 @@
 <?php
 $language = $_POST['languagePair'];
 $field = $_POST['field'];
+$length = $_POST['length'];
 echo $language;
 echo $field;
+echo $length;
 
 function quoteProject($language, $field){
 echo "AAA";
