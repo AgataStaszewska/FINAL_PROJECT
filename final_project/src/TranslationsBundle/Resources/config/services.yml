@@ -1,4 +1,0 @@
-services:
-#    translations.example:
-#        class: TranslationsBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
